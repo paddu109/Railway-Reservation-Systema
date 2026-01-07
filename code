@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int totalSeats = 50;
+        int availableSeats = totalSeats;
+
+        String passengerName = "";
+        int trainNumber = 0;
+        boolean ticketBooked = false;
+
+        while (true) {
+
+            System.out.println("\n===== Railway Reservation System =====");
+            System.out.println("1. Book Ticket");
+            System.out.println("2. View Ticket");
+            System.out.println("3. Cancel Ticket");
+            System.out.println("4. Check Available Seats");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    if (!ticketBooked && availableSeats > 0) {
+                        System.out.print("Enter Passenger Name: ");
+                        passengerName = sc.next();
+
+                        System.out.print("Enter Train Number: ");
+                        trainNumber = sc.nextInt();
+
+                        availableSeats--;
+                        ticketBooked = true;
+
+                        System.out.println("Ticket Booked Successfully!");
+                    } else {
+                        System.out.println("Ticket already booked or no seats available.");
+                    }
+                    break;
+
+                case 2:
+                    if (ticketBooked) {
+                        System.out.println("Passenger Name : " + passengerName);
+                        System.out.println("Train Number   : " + trainNumber);
+                        System.out.println("Ticket Status  : Confirmed");
+                    } else {
+                        System.out.println("No ticket booked yet.");
+                    }
+                    break;
+
+                case 3:
+                    if (ticketBooked) {
+                        ticketBooked = false;
+                        availableSeats++;
+                        System.out.println("Ticket Cancelled Successfully!");
+                    } else {
+                        System.out.println("No ticket to cancel.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Available Seats: " + availableSeats);
+                    break;
+
+                case 5:
+                    System.out.println("Thank you for using Railway Reservation System 🚆");
+                    sc.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
